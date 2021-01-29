@@ -1,0 +1,200 @@
+#!/bin/bash
+vpspackversion = 5.8
+OS = `uname -m`;
+date = `date`;
+IP = $ (wget -qO- ipv4.icanhazip.com)
+fun_bar () {
+command [0] = "$ 1"
+command [1] = "$ 2"
+(
+[[-e $ HOME / fim]] && rm $ HOME / fim
+$ {command [0]} -y> / dev / null 2> & 1
+$ {command [1]} -y> / dev / null 2> & 1
+touch $ HOME / fim
+)> / dev / null 2> & 1 &
+tput civis
+echo -ne "\ 033 [1; 33m WAIT \ 033 [1; 37m- \ 033 [1; 33m ["
+while true; do
+for ((i = 0; i <18; i ++)); do
+echo -ne "\ 033 [1; 31mΔ"
+sleep 0.1s
+done
+[[-e $ HOME / fim]] && rm $ HOME / fim && break
+echo -e "\ 033 [1; 33m]"
+sleep 1s
+tput cuu1
+tput dl1
+echo -ne "\ 033 [1; 33m WAIT \ 033 [1; 37m- \ 033 [1; 33m ["
+done
+echo -e "\ 033 [1; 33m] \ 033 [1; 37m - \ 033 [1; 32m OK! \ 033 [1; 37m"
+tput cnorm
+}
+#rm -rf / etc / VpsPackdir
+vp = "/ etc / VpsPackdir"
+echo -e "\ e [1; 31m PLEASE WAIT ......."
+echo -e "\ e [1; 31m ATTENTION PLEASE ....... \ n THIS SCRIPT WILL INSTALL APACHE AL 85 \ n"
+read -p "DO YOU WANT TO CONTINUE WITH THE INSTALLATION (y / n) ?:" reply
+if [["$ reply" = 's']]; then
+
+if [$ (id -u)! = 0]
+then
+echo "Run the script as root"
+exit
+fi
+clear
+cd / root
+[[! -d $ {vp}]] && mkdir $ {vp}
+#straining
+#SCRIPT FOR TESTING ONLY: IT MAY SAY AN ERROR ..., NOTIFY IT TO  @Jo3k3r
+
+#revealed by: JokerTeam
+
+Start(){
+mkdir / etc / vp &> / dev / null
+cd / etc / vp
+wget https://raw.githubusercontent.com/lacasitamx/vpspack5.8/master/source/clean.zip &> / dev / null
+unzip clean.zip &> / dev / null
+cp pack / * $ {vp} /
+chmod + x $ {vp} / *
+echo -e "source extracted successfully"
+rm -rf /etc/vp/clean.zip
+rm -rf / etc / pack
+sleep 2
+cd / root
+}
+startbin () {
+linkbin = https: //raw.githubusercontent.com/lacasitamx/vpspack5.8/master/source/rebin.zip
+cd / etc / vp
+wget $ linkbin &> / dev / null
+unzip rebin.zip &> / dev / null
+cp rebin / * / bin /
+
+chmod + x / bin / vpspack / bin / toolmaster / bin / renew user / bin / redefine user / bin / delete user / bin / create user / bin / limit /bin/speedtest.py / bin / installers
+echo -e "bin extracted successfully"
+sleep 2
+rm -rf / etc / vp
+cd / root
+}
+echo -e "\ e [43m OK ... WAIT A MOMENT> \ e [0m"
+threw out ""
+fun_bar 'apt-get install zip -y'
+fun_bar 'apt-get install unzip -y'
+Start
+cat / etc / VpsPackdir / logo
+echo -e "[\ 033 [1; 31m- \ 033 [1; 33m] \ 033 [1; 30m ───────────────────────── ────────────── \ 033 [1; 33m "
+echo -e "\ 033 [1; 33mInstalling \ 033 [1; 32mVPSPack $ vpspackversion \ 033 [0m"
+echo -e "\ 033 [1; 33m Please wait \ 033 [0m"
+echo -e "\ 033 [1; 33m The necessary packages will be installed \ 033 [0m"
+echo -e "\ 033 [1; 33m Telegram : @Jo3k3r & @ankkarbitan \ 033 [0m"
+echo -e "[\ 033 [1; 31m- \ 033 [1; 33m] \ 033 [1; 30m ───────────────────────── ────────────── \ 033 [1; 33m "
+sleep 5
+echo -e "[\ 033 [1; 31m- \ 033 [1; 33m] \ 033 [1; 30m Preparing System \ 033 [1; 33m"
+function prepare () {
+touch /root/users.db
+touch /root/badvpn.log
+mkdir / etc / VpsPackdir / limit 2> / dev / null
+mkdir / etc / VpsPackdir / senha 2> / dev / null
+mkdir / etc / VpsPackdir / v 2> / dev / null
+mkdir / etc / VpsPackdir / socks 2> / dev / null
+rm -rf / etc / VpsPackdir / date 2> / dev / null
+rm -rf / root / name 2> / dev / null
+#
+rm /etc/VpsPackdir/socks/s.zip
+curl -o /etc/VpsPackdir/socks/s.zip https://raw.githubusercontent.com/lacasitamx/tests/master/s.zip
+cd / etc / VpsPackdir / socks /
+unzip s.zip
+rm /etc/VpsPackdir/socks/s.zip
+cd / root
+if grep vpspack / etc / ssh / sshd_config; then
+echo "vpspack found OK"
+else
+cp / etc / VpsPackdir / sshconf / etc / ssh / sshd_config;
+service ssh restart
+echo "Configured"
+fi
+chmod + x / root / dropbear
+}
+fun_bar 'prepare'
+function packages () {
+echo -e "[\ 033 [1; 31m- \ 033 [1; 33m] \ 033 [1; 30m Installing Packages \ 033 [1; 33m"
+sed -i '/ neofetch / d' /etc/apt/sources.list
+apt-get update
+apt-get -y install nano 1> / dev / null 2> / dev / null
+apt-get -y install net-tools 1> / dev / null 2> / dev / null
+apt-get -y install iptables 1> / dev / null 2> / dev / null
+# apt-get -y install unzip 1> / dev / null 2> / dev / null
+apt-get -y install htop 1> / dev / null 2> / dev / null
+apt-get -y install curl 1> / dev / null 2> / dev / null
+apt-get -y install figlet 1> / dev / null 2> / dev / null
+apt-get -y install locate 1> / dev / null 2> / dev / null
+# apt-get -y install zip 1> / dev / null 2> / dev / null
+apt-get -y install git 1> / dev / null 2> / dev / null
+apt-get -y install build-essential libpq-dev libffi-dev zlib1g-dev 1> / dev / null 2> / dev / null
+apt-get -y install screen 1> / dev / null 2> / dev / null
+apt-get -y install python-pip 1> / dev / null 2> / dev / null
+apt-get -y install python3-pip 1> / dev / null 2> / dev / null
+apt-get -y install nload 1> / dev / null 2> / dev / null
+apt-get -y install dos2unix 1> / dev / null 2> / dev / null
+apt-get -y install lsof 1> / dev / null 2> / dev / null
+apt-get -y install speedtest-cli 1> / dev / null 2> / dev / null
+apt-get -y install openssl libssl-dev pkg-config 1> / dev / null 2> / dev / null
+pip install speedtest-cli> / dev / null 2> & 1
+apt-get remove apache2 -y && apt-get purge apache2 -y 1> / dev / null 2> / dev / null
+rm -rf / var / wwww / html / * 1> / dev / null 2> / dev / null
+service apache2 stop 1> / dev / null 2> / dev / null
+apt-get install apache2 -y 1> / dev / null 2> / dev / null
+sed -i 's / Listen 80 / Listen 85 / g' /etc/apache2/ports.conf 1> / dev / null 2> / dev / null
+rm /var/www/html/index.html 1> / dev / null 2> / dev / null
+wget -o / dev / null -O- wget https://raw.githubusercontent.com/kirrathmx/dl/master/index.txt> /var/www/html/index.html
+cd / root
+service apache2 restart 1> / dev / null 2> / dev / null
+mkdir / var / www / html / openvpn
+apt-get install -y neofetch 1> / dev / null 2> / dev / null
+echo -e "[\ 033 [1; 31m- \ 033 [1; 33m] \ 033 [1; 30m Installation Finished \ 033 [1; 33m"
+}
+fun_bar 'packages'
+startbin
+sleep 5
+clear
+if cat /root/.bashrc | grep vpspack; then
+echo -e ":)"
+else
+echo "clear" >> .bashrc
+echo 'cat / etc / VpsPackdir / logo' >> .bashrc
+echo 'DATE = $ (date + "% d-% m-% y")' >> .bashrc
+echo 'TIME = $ (date + "% T")' >> .bashrc
+echo 'echo -e ""' >> .bashrc
+echo 'echo -e "Server Name: $ HOSTNAME"' >> .bashrc
+echo 'echo -e "Server Date: $ DATE"' >> .bashrc
+echo 'echo -e "Server Time: $ TIME"' >> .bashrc
+echo 'echo -e ""' >> .bashrc
+echo 'echo -e "JOKER TEAM"' >> .bashrc
+echo 'echo -e "Type vpspack to see the command list."' >> .bashrc
+echo 'echo -e ""' >> .bashrc
+fi
+clear
+rm / etc / VpsPackdir / ip &> / dev / null
+touch / etc / VpsPackdir / ip
+echo "$ IP"> / etc / VpsPackdir / ip
+cat / etc / VpsPackdir / logo
+echo -e "\ 033 [1; 32m Installation Completed \ n \ 033 [1; 30m"
+echo -e "\ n \ 033 [1; 32mvpspack \ 033 [1; 30m OPTION MENU"
+echo -e "\ 033 [1; 32mOption 1 \ 033 [1; 30mINSTALL SQUID / SSH"
+echo -e "\ 033 [1; 32mOption 2 \ 033 [1; 30m USER ADMINISTRATION"
+echo -e "\ 033 [1; 32mOption 8 \ 033 [1; 30m ENABLED PORTS"
+echo -e "\ 033 [1; 32mOption 9 \ 033 [1; 30mTOOLS"
+echo -e "\ 033 [1; 32mOption 10 \ 033 [1; 30mINSTALLERS"
+echo -e "\ 033 [1; 32m @ - \ 033 [1; 30m credits: @jo3k3r \ 033 [0m"
+echo -e "\ 033 [1; 32m @ - \ 033 [1; 31mREV:: JokerTeam \ 033 [0m"
+echo -e "\ 033 [1; 32m @ - \ 033 [1; 31mlink: by: joker \ 033 [0m"
+echo -e "\ 033 [1; 32mVersion \ 033 [1; 30m $ vpspackversion \ 033 [0m"
+echo -e "$ date" >> / etc / VpsPackdir / date
+echo -e "\ 033 [1; 32m Personalization - Write your Nickname: \ 033 [0m"
+echo -e "\ 033 [1; 32m (Maximum 10 Characters) \ 033 [0m"
+read -p ":" nickname
+echo "$ nickname" >> / root / name
+cd / root
+rminstavps
+vpspack
+fi
+rm -rf / root /instavps
